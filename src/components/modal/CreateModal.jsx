@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import classes from './CreateModal.module.css';
-import { API_BASE } from '../../client/api';
-import axios from 'axios';
+import api from '../../client/api';
 
-function CreateModal({ onClose, onCreated }) {
+function CreateModal({onClose, onCreated}) {
     const [title, setTitle] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post(`${API_BASE}/api/todos`, { text: title }, { withCredentials: true })
-            .then((res) => {
-                onCreated(res.data);
-                onClose();
-            })
-            .catch(err => console.error("Error creating todo:", err));
+        try {
+            const res = await api.post('/api/todos', {text: title});
+            onCreated(res.data);
+            onClose();
+        } catch (err) {
+            console.error("Error creating todo:", err);
+        }
     };
 
     return (

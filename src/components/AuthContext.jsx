@@ -1,4 +1,4 @@
-import {createContext, useState, useEffect, useContext} from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 import api from "../client/api";
 
 const AuthContext = createContext(null);
@@ -29,11 +29,8 @@ export const AuthProvider = ({children}) => {
         }
     };
 
-    const logout = async () => {
-        try {
-        } finally {
-            setUser(null);
-        }
+    const logout = () => {
+        setUser(null);
     };
 
     return (

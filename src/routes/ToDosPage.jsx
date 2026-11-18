@@ -1,6 +1,6 @@
 import ToDosList from "../components/ToDosList";
 import {useOutletContext} from "react-router-dom";
-import {useEffect, useState, useRef} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import api from "../client/api";
 
 function ToDosPage() {
@@ -9,17 +9,17 @@ function ToDosPage() {
     const fileInputRefs = useRef({});
     const {reloadKey} = useOutletContext();
 
-    const loadData = () => {
+    const loadData = useCallback(() => {
         api.get('/api/todos')
             .then(res => {
                 setTodos(res.data);
             })
             .catch(err => console.error("Fetch error:", err));
-    };
+    }, []);
 
     useEffect(() => {
         loadData();
-    }, [reloadKey]);
+    }, [reloadKey, loadData]);
 
     const handleDelete = (id) => {
         api.delete(`/api/todos/${id}`)
