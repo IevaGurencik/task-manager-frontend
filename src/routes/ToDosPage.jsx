@@ -59,7 +59,7 @@ function ToDosPage() {
     };
 
     const handleDeleteFile = (fileId, todoId) => {
-        api.delete(`/api/files/id/${fileId}`)
+        api.delete(`/api/files/${fileId}`)
             .then(() => {
                 setTodos(prevTodos => prevTodos.map(todo => {
                     if (todo.id === todoId) {

@@ -30,7 +30,7 @@ function ToDo({
                         {files.map((file) => (
                             <div key={file.id} className={toDoClasses.fileRow}>
                                 <a
-                                    href={`${API_BASE}/api/files/id/${file.id}`}
+                                    href={`${API_BASE}/api/files/${file.id}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     download
